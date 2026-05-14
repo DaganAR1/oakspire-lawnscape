@@ -1039,17 +1039,25 @@
 
         /* ── Our Work gallery ── */
         .our-work {
-            padding: 120px 0;
-            background-color: var(--forest);
-            color: var(--white);
+            padding: 100px 0;
+            background-color: var(--white);
         }
-        .our-work .header-main h2 { color: rgba(212,175,55,0.9); }
-        .our-work .header-main h3 { color: var(--white); }
+        .gallery-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 2.5rem;
+            gap: 2rem;
+        }
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            grid-auto-rows: 280px;
+            grid-auto-rows: 230px;
             gap: 0.875rem;
+        }
+        .gallery-featured {
+            grid-column: 1 / 3;
+            grid-row: 1 / 3;
         }
         .gallery-item {
             border-radius: 14px;
@@ -1057,24 +1065,35 @@
             position: relative;
             cursor: pointer;
         }
-        .gallery-item.tall { grid-row: span 2; }
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
-            transition: transform 0.6s ease;
+            transition: transform 0.65s ease;
         }
-        .gallery-item:hover img { transform: scale(1.06); }
+        .gallery-item:hover img { transform: scale(1.05); }
+        /* gold border glow */
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 14px;
+            border: 2.5px solid var(--gold);
+            opacity: 0;
+            transition: opacity 0.35s ease;
+            pointer-events: none;
+        }
+        .gallery-item:hover::after { opacity: 1; }
         .gallery-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(to top, rgba(22,38,27,0.75) 0%, transparent 55%);
+            background: linear-gradient(to top, rgba(22,38,27,0.82) 0%, transparent 55%);
             opacity: 0;
-            transition: opacity 0.4s ease;
+            transition: opacity 0.35s ease;
             display: flex;
             align-items: flex-end;
-            padding: 1.25rem;
+            padding: 1.4rem;
         }
         .gallery-item:hover .gallery-overlay { opacity: 1; }
         .gallery-label {
@@ -1082,15 +1101,116 @@
             font-size: 0.75rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.12em;
+            letter-spacing: 0.15em;
+            border-left: 2px solid var(--gold);
+            padding-left: 0.65rem;
         }
         @media (max-width: 768px) {
-            .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 220px; }
-            .gallery-item.tall { grid-row: span 1; }
+            .gallery-grid {
+                grid-template-columns: 1fr 1fr;
+                grid-auto-rows: 200px;
+            }
+            .gallery-featured { grid-column: 1 / 3; grid-row: 1; }
+            .gallery-header { flex-direction: column; align-items: flex-start; }
             .our-work { padding: 80px 0; }
         }
         @media (max-width: 480px) {
-            .gallery-grid { grid-template-columns: 1fr; grid-auto-rows: 240px; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .gallery-featured { grid-column: 1; }
+        }
+
+        /* ── Quick Quote strip ── */
+        .quick-quote {
+            background-color: var(--forest);
+            padding: 80px 0;
+        }
+        .quick-quote-inner {
+            display: grid;
+            grid-template-columns: 1fr 1.6fr;
+            gap: 5rem;
+            align-items: center;
+        }
+        .qq-eyebrow {
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: var(--gold);
+            margin-bottom: 0.75rem;
+            font-family: 'Inter', sans-serif;
+        }
+        .quick-quote-copy h3 {
+            font-size: clamp(1.6rem, 4vw, 2.2rem);
+            color: var(--white);
+            margin-bottom: 0.75rem;
+        }
+        .quick-quote-copy > p {
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 1.75rem;
+            font-size: 1rem;
+        }
+        .phone-cta-inline {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-decoration: none;
+            font-family: 'Playfair Display', serif;
+            transition: var(--transition);
+        }
+        .phone-cta-inline:hover { color: var(--white); }
+        .quick-form-fields {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.875rem;
+        }
+        .quick-form-fields input,
+        .quick-form-fields select {
+            padding: 0.9rem 1rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.08);
+            color: var(--white);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            transition: border-color 0.3s;
+        }
+        .quick-form-fields input::placeholder { color: rgba(255,255,255,0.4); }
+        .quick-form-fields select { color: rgba(255,255,255,0.55); }
+        .quick-form-fields select option { background: var(--forest); color: var(--white); }
+        .quick-form-fields input:focus,
+        .quick-form-fields select:focus {
+            outline: none;
+            border-color: var(--gold);
+            background: rgba(255,255,255,0.12);
+        }
+        .quick-submit {
+            grid-column: 1 / -1;
+            padding: 1rem;
+            background: var(--gold);
+            color: var(--forest);
+            border: none;
+            border-radius: 10px;
+            font-weight: 800;
+            font-size: 0.95rem;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: var(--transition);
+            letter-spacing: 0.02em;
+        }
+        .quick-submit:hover:not(:disabled) {
+            background: var(--gold-dark);
+            transform: translateY(-2px);
+        }
+        .quick-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+        @media (max-width: 900px) {
+            .quick-quote-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+            .quick-quote { padding: 64px 0; }
+        }
+        @media (max-width: 576px) {
+            .quick-form-fields { grid-template-columns: 1fr; }
         }
 
         /* ── Fluid type scaling ── */
@@ -1193,7 +1313,7 @@
                 <a href="#work">Our Work</a>
                 <a href="#about">About</a>
                 <a href="#contact">Contact</a>
-                <a href="#contact" class="nav-cta">Free Estimate</a>
+                <a href="tel:9402089959" class="nav-cta">Free Estimate</a>
             </div>
             <div class="hamburger" id="hamburger">
                 <span></span>
@@ -1210,7 +1330,7 @@
                 <h1>Lawn Care & Landscaping <span class="accent">in Denton, TX</span></h1>
                 <p>Professional mowing, landscaping, and seasonal care — reliable, affordable, and built around your schedule.</p>
                 <div class="hero-btns">
-                    <a href="#contact" class="btn btn-primary">Get a Free Estimate</a>
+                    <a href="tel:9402089959" class="btn btn-primary">Get a Free Estimate</a>
                     <a href="#services" class="btn btn-outline">Explore Our Services</a>
                 </div>
             </div>
@@ -1402,6 +1522,48 @@
         </div>
     </section>
 
+    <!-- Quick Quote Strip -->
+    <section class="quick-quote">
+        <div class="container">
+            <div class="quick-quote-inner">
+                <div class="quick-quote-copy">
+                    <p class="qq-eyebrow">No Obligation</p>
+                    <h3>Get a Free Callback Today</h3>
+                    <p>Fill out the form and we'll call you back same day — or just dial us directly.</p>
+                    <a href="tel:9402089959" class="phone-cta-inline">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        (940) 208-9959
+                    </a>
+                </div>
+                <form id="quickForm">
+                    <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
+                    <input type="hidden" name="subject" value="Quick Quote Request — Oakspire Lawnscape">
+                    <input type="hidden" name="from_name" value="Oakspire Lawnscape Website">
+                    <input type="checkbox" name="botcheck" style="display:none">
+                    <div class="quick-form-fields">
+                        <input type="text" name="name" placeholder="Your name" required>
+                        <input type="tel" name="quick_phone" id="quickPhone" placeholder="Phone number" required>
+                        <select name="service" required>
+                            <option value="">Service needed</option>
+                            <option>Lawn Mowing</option>
+                            <option>Flowerbed Care</option>
+                            <option>Mulching</option>
+                            <option>Aeration</option>
+                            <option>Hedge Trimming</option>
+                            <option>Weed Control</option>
+                            <option>Leaf Removal</option>
+                            <option>Seasonal Cleanup</option>
+                        </select>
+                        <textarea name="message" placeholder="Anything else? (optional)" rows="2" style="border-radius:10px;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.08);color:var(--white);font-family:'Inter',sans-serif;font-size:0.95rem;padding:0.9rem 1rem;resize:none;transition:border-color 0.3s;" onfocus="this.style.borderColor='var(--gold)';this.style.background='rgba(255,255,255,0.12)'" onblur="this.style.borderColor='rgba(255,255,255,0.15)';this.style.background='rgba(255,255,255,0.08)'"></textarea>
+                        <button type="submit" class="quick-submit" id="quickSubmitBtn">Request a Callback →</button>
+                    </div>
+                    <div id="quickSuccess" style="display:none;color:var(--gold);font-weight:700;margin-top:1rem;text-align:center;">Got it! We'll call you back today.</div>
+                    <div id="quickError" style="display:none;color:#f87171;font-weight:600;margin-top:1rem;font-size:0.9rem;text-align:center;">Something went wrong — please call us directly.</div>
+                </form>
+            </div>
+        </div>
+    </section>
+
     <!-- Reviews -->
     <section id="reviews" class="reviews">
         <div class="container">
@@ -1506,45 +1668,40 @@
         </div>
     </section>
 
-    <!-- Our Work / Portfolio -->
-    <!-- TIP: Replace the Unsplash src URLs below with your own job photos -->
+    <!-- Our Work / Portfolio — replace src URLs with your own job photos -->
     <section id="work" class="our-work">
         <div class="container">
-            <div class="section-header reveal" style="margin-bottom:60px;">
+            <div class="gallery-header reveal">
                 <div class="header-main">
                     <h2>Our Work</h2>
                     <h3>Results that speak for themselves.</h3>
                 </div>
-                <a href="#contact" class="btn btn-primary btn-rounded">Get This Look</a>
+                <a href="tel:9402089959" class="btn btn-primary btn-rounded">Call for a Quote</a>
             </div>
             <div class="gallery-grid reveal">
-                <div class="gallery-item tall">
-                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=1200" alt="Lawn mowing Denton TX">
+                <div class="gallery-item gallery-featured">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=1600" alt="Lawn mowing Denton TX">
                     <div class="gallery-overlay"><span class="gallery-label">Lawn Mowing</span></div>
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1592419044706-39796d40f98c?auto=format&fit=crop&q=80&w=1200" alt="Striped lawn Denton TX">
+                    <img src="https://images.unsplash.com/photo-1592419044706-39796d40f98c?auto=format&fit=crop&q=80&w=900" alt="Precision striped lawn">
                     <div class="gallery-overlay"><span class="gallery-label">Precision Mowing</span></div>
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&q=80&w=1200" alt="Landscaping Denton TX">
+                    <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&q=80&w=900" alt="Landscaping Denton TX">
                     <div class="gallery-overlay"><span class="gallery-label">Landscaping</span></div>
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1563212034-a3c52118cce2?auto=format&fit=crop&q=80&w=1200" alt="Manicured lawn">
+                    <img src="https://images.unsplash.com/photo-1563212034-a3c52118cce2?auto=format&fit=crop&q=80&w=900" alt="Manicured lawn">
                     <div class="gallery-overlay"><span class="gallery-label">Lawn Care</span></div>
                 </div>
-                <div class="gallery-item tall">
-                    <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4aaae?auto=format&fit=crop&q=80&w=1200" alt="Edging and trimming">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4aaae?auto=format&fit=crop&q=80&w=900" alt="Edging and trimming">
                     <div class="gallery-overlay"><span class="gallery-label">Edging & Trimming</span></div>
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1416453072034-c8dbfa2856b1?auto=format&fit=crop&q=80&w=1200" alt="Hedge trimming">
+                    <img src="https://images.unsplash.com/photo-1416453072034-c8dbfa2856b1?auto=format&fit=crop&q=80&w=900" alt="Hedge trimming">
                     <div class="gallery-overlay"><span class="gallery-label">Hedge Trimming</span></div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1558905619-172542632462?auto=format&fit=crop&q=80&w=1200" alt="Seasonal cleanup">
-                    <div class="gallery-overlay"><span class="gallery-label">Seasonal Cleanup</span></div>
                 </div>
             </div>
         </div>
@@ -1776,6 +1933,39 @@
             }
         });
         track.addEventListener('touchend', () => { isDragging = false; resetAutoSlide(); });
+
+        // Quick Quote form
+        document.getElementById('quickPhone').addEventListener('input', (e) => {
+            let x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
+            e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+        });
+
+        document.getElementById('quickForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('quickSubmitBtn');
+            btn.disabled = true;
+            btn.textContent = 'Sending…';
+            document.getElementById('quickSuccess').style.display = 'none';
+            document.getElementById('quickError').style.display = 'none';
+            try {
+                const res = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST', body: new FormData(e.target)
+                });
+                const data = await res.json();
+                if (data.success) {
+                    document.getElementById('quickSuccess').style.display = 'block';
+                    e.target.reset();
+                    setTimeout(() => { document.getElementById('quickSuccess').style.display = 'none'; }, 6000);
+                } else {
+                    document.getElementById('quickError').style.display = 'block';
+                }
+            } catch {
+                document.getElementById('quickError').style.display = 'block';
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Request a Callback →';
+            }
+        });
 
         // Phone formatting
         document.getElementById('phone').addEventListener('input', (e) => {
