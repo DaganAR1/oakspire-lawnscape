@@ -559,9 +559,33 @@
             align-items: center;
         }
 
-        .why-symbol {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
+        .why-icon {
+            width: 64px;
+            height: 64px;
+            background-color: var(--forest);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+            color: var(--gold);
+            flex-shrink: 0;
+            box-shadow: 0 8px 24px rgba(22, 38, 27, 0.18);
+            transition: var(--transition);
+        }
+
+        .why-item-modern:hover .why-icon {
+            background-color: var(--forest-light);
+            transform: translateY(-3px);
+            box-shadow: 0 14px 32px rgba(22, 38, 27, 0.22);
+        }
+
+        .why-icon svg {
+            stroke: var(--gold);
+            fill: none;
+            stroke-width: 1.75;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }
 
         .why-label {
@@ -1226,22 +1250,43 @@
         <div class="container modern-why-container">
             <div class="why-grid-modern reveal">
                 <div class="why-item-modern">
-                    <div class="why-symbol">📍</div>
+                    <div class="why-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                            <circle cx="12" cy="10" r="3"/>
+                        </svg>
+                    </div>
                     <div class="why-label">Denton Based</div>
                     <div class="why-desc">We live and work here — fast scheduling and a team you can actually reach.</div>
                 </div>
                 <div class="why-item-modern">
-                    <div class="why-symbol">✅</div>
+                    <div class="why-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            <polyline points="9 12 11 14 15 10"/>
+                        </svg>
+                    </div>
                     <div class="why-label">Fully Professional</div>
                     <div class="why-desc">Commercial-grade equipment, consistent quality, and no shortcuts — ever.</div>
                 </div>
                 <div class="why-item-modern">
-                    <div class="why-symbol">⭐</div>
+                    <div class="why-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                        </svg>
+                    </div>
                     <div class="why-label">5.0 Rated</div>
                     <div class="why-desc">17 Google reviews — all five stars. Let your neighbors speak for us.</div>
                 </div>
                 <div class="why-item-modern">
-                    <div class="why-symbol">📋</div>
+                    <div class="why-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24">
+                            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+                            <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
+                            <line x1="9" y1="12" x2="15" y2="12"/>
+                            <line x1="9" y1="16" x2="13" y2="16"/>
+                        </svg>
+                    </div>
                     <div class="why-label">Free Estimates</div>
                     <div class="why-desc">No-obligation quotes, usually same day. Just call or fill out our form.</div>
                 </div>
