@@ -613,8 +613,6 @@
 
         .reviews-container {
             position: relative;
-            max-width: 800px;
-            margin: 0 auto;
         }
 
         .reviews-track-container {
@@ -623,13 +621,18 @@
 
         .reviews-track {
             display: flex;
+            gap: 1.5rem;
             transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .review-card {
-            min-width: 100%;
+            min-width: calc(33.333% - 1rem);
+            flex-shrink: 0;
             padding: 2rem;
             text-align: center;
+            background: var(--cream-dark);
+            border-radius: 20px;
+            border: 1px solid rgba(22, 38, 27, 0.06);
         }
 
         .stars {
@@ -980,6 +983,116 @@
             stroke-linejoin: round;
         }
 
+        /* ── Centered section header (Services) ── */
+        .section-header-centered {
+            text-align: center;
+            max-width: 640px;
+            margin: 0 auto 72px;
+        }
+        .section-header-centered h2 {
+            font-size: 0.75rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            margin-bottom: 1rem;
+            font-family: 'Inter', sans-serif;
+        }
+        .section-header-centered h3 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            color: var(--forest);
+            margin-bottom: 1rem;
+            line-height: 1.15;
+        }
+        .section-subtext {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .section-subtext strong {
+            color: var(--forest);
+            font-weight: 700;
+        }
+
+        /* ── Reviews multi-card ── */
+        .reviews-track {
+            display: flex;
+            gap: 1.5rem;
+        }
+        .review-card {
+            min-width: calc(33.333% - 1rem);
+            flex-shrink: 0;
+            padding: 2rem;
+            text-align: center;
+            background: var(--cream-dark);
+            border-radius: 20px;
+            border: 1px solid rgba(22, 38, 27, 0.06);
+        }
+        .review-text { font-size: clamp(1rem, 1.8vw, 1.2rem); }
+        @media (max-width: 900px) {
+            .review-card { min-width: calc(50% - 0.75rem); }
+            .review-text { font-size: 1.1rem; }
+        }
+        @media (max-width: 576px) {
+            .review-card { min-width: 100%; }
+            .review-text { font-size: 1.15rem; }
+        }
+
+        /* ── Our Work gallery ── */
+        .our-work {
+            padding: 120px 0;
+            background-color: var(--forest);
+            color: var(--white);
+        }
+        .our-work .header-main h2 { color: rgba(212,175,55,0.9); }
+        .our-work .header-main h3 { color: var(--white); }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-auto-rows: 280px;
+            gap: 0.875rem;
+        }
+        .gallery-item {
+            border-radius: 14px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+        .gallery-item.tall { grid-row: span 2; }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s ease;
+        }
+        .gallery-item:hover img { transform: scale(1.06); }
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(22,38,27,0.75) 0%, transparent 55%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            display: flex;
+            align-items: flex-end;
+            padding: 1.25rem;
+        }
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+        .gallery-label {
+            color: var(--white);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+        }
+        @media (max-width: 768px) {
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 220px; }
+            .gallery-item.tall { grid-row: span 1; }
+            .our-work { padding: 80px 0; }
+        }
+        @media (max-width: 480px) {
+            .gallery-grid { grid-template-columns: 1fr; grid-auto-rows: 240px; }
+        }
+
         /* ── Fluid type scaling ── */
         .header-main h3       { font-size: clamp(1.6rem, 4vw, 2.5rem); }
         .about-content h3     { font-size: clamp(1.8rem, 5vw, 3rem); }
@@ -1077,6 +1190,7 @@
             <div class="nav-links" id="navLinks">
                 <a href="#services">Services</a>
                 <a href="#reviews">Reviews</a>
+                <a href="#work">Our Work</a>
                 <a href="#about">About</a>
                 <a href="#contact">Contact</a>
                 <a href="#contact" class="nav-cta">Free Estimate</a>
@@ -1109,16 +1223,10 @@
     <!-- Services -->
     <section id="services" class="services">
         <div class="container">
-            <div class="section-header reveal">
-                <div class="header-main">
-                    <h2>The Oakspire Standard</h2>
-                    <h3>Everything your lawn needs to thrive.</h3>
-                </div>
-                <div class="header-tags">
-                    <div class="tag">Denton</div>
-                    <div class="tag">Ponder</div>
-                    <div class="tag">Robson Ranch</div>
-                </div>
+            <div class="section-header-centered reveal">
+                <h2>The Oakspire Standard</h2>
+                <h3>Everything your lawn needs to thrive.</h3>
+                <p class="section-subtext">Proudly serving <strong>Denton</strong>, <strong>Ponder</strong>, <strong>Robson Ranch</strong>, and the greater DFW area.</p>
             </div>
             <div class="services-grid">
                 <!-- S1 -->
@@ -1398,6 +1506,50 @@
         </div>
     </section>
 
+    <!-- Our Work / Portfolio -->
+    <!-- TIP: Replace the Unsplash src URLs below with your own job photos -->
+    <section id="work" class="our-work">
+        <div class="container">
+            <div class="section-header reveal" style="margin-bottom:60px;">
+                <div class="header-main">
+                    <h2>Our Work</h2>
+                    <h3>Results that speak for themselves.</h3>
+                </div>
+                <a href="#contact" class="btn btn-primary btn-rounded">Get This Look</a>
+            </div>
+            <div class="gallery-grid reveal">
+                <div class="gallery-item tall">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=1200" alt="Lawn mowing Denton TX">
+                    <div class="gallery-overlay"><span class="gallery-label">Lawn Mowing</span></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1592419044706-39796d40f98c?auto=format&fit=crop&q=80&w=1200" alt="Striped lawn Denton TX">
+                    <div class="gallery-overlay"><span class="gallery-label">Precision Mowing</span></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&q=80&w=1200" alt="Landscaping Denton TX">
+                    <div class="gallery-overlay"><span class="gallery-label">Landscaping</span></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1563212034-a3c52118cce2?auto=format&fit=crop&q=80&w=1200" alt="Manicured lawn">
+                    <div class="gallery-overlay"><span class="gallery-label">Lawn Care</span></div>
+                </div>
+                <div class="gallery-item tall">
+                    <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4aaae?auto=format&fit=crop&q=80&w=1200" alt="Edging and trimming">
+                    <div class="gallery-overlay"><span class="gallery-label">Edging & Trimming</span></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1416453072034-c8dbfa2856b1?auto=format&fit=crop&q=80&w=1200" alt="Hedge trimming">
+                    <div class="gallery-overlay"><span class="gallery-label">Hedge Trimming</span></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1558905619-172542632462?auto=format&fit=crop&q=80&w=1200" alt="Seasonal cleanup">
+                    <div class="gallery-overlay"><span class="gallery-label">Seasonal Cleanup</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Service Area Map -->
     <section class="service-map">
         <div class="container">
@@ -1549,7 +1701,7 @@
 
         revealElements.forEach(el => revealObserver.observe(el));
 
-        // Reviews Carousel
+        // Reviews Carousel — multi-card
         const track = document.getElementById('track');
         const slides = Array.from(track.children);
         const nextBtn = document.getElementById('nextBtn');
@@ -1560,63 +1712,66 @@
         let isDragging = false;
         let startX;
 
-        // Create dots
-        slides.forEach((_, index) => {
+        function getVisible() {
+            if (window.innerWidth <= 576) return 1;
+            if (window.innerWidth <= 900) return 2;
+            return 3;
+        }
+
+        slides.forEach((_, i) => {
             const dot = document.createElement('div');
             dot.classList.add('dot');
-            if (index === 0) dot.classList.add('active');
-            dot.addEventListener('click', () => goToSlide(index));
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(i));
             dotsNav.appendChild(dot);
         });
 
         const dots = Array.from(dotsNav.children);
 
         function updateDots() {
+            const maxIdx = slides.length - getVisible();
             dots.forEach((dot, i) => {
                 dot.classList.toggle('active', i === currentIndex);
+                dot.style.display = i <= maxIdx ? '' : 'none';
             });
         }
 
         function goToSlide(index) {
-            currentIndex = index;
-            track.style.transform = `translateX(${-currentIndex * 100}%)`;
+            const visible = getVisible();
+            const maxIdx = slides.length - visible;
+            currentIndex = Math.max(0, Math.min(index, maxIdx));
+            const gap = 24;
+            const containerW = document.getElementById('trackContainer').offsetWidth;
+            const cardW = (containerW - gap * (visible - 1)) / visible;
+            track.style.transform = `translateX(-${currentIndex * (cardW + gap)}px)`;
             updateDots();
             resetAutoSlide();
         }
 
-        nextBtn.addEventListener('click', () => {
-            currentIndex = (currentIndex + 1) % slides.length;
-            goToSlide(currentIndex);
-        });
-
-        prevBtn.addEventListener('click', () => {
-            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-            goToSlide(currentIndex);
-        });
+        nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
+        prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
 
         let autoSlideInterval = setInterval(() => {
-            currentIndex = (currentIndex + 1) % slides.length;
-            goToSlide(currentIndex);
+            goToSlide(currentIndex >= slides.length - getVisible() ? 0 : currentIndex + 1);
         }, 5000);
 
         function resetAutoSlide() {
             clearInterval(autoSlideInterval);
             autoSlideInterval = setInterval(() => {
-                currentIndex = (currentIndex + 1) % slides.length;
-                goToSlide(currentIndex);
+                goToSlide(currentIndex >= slides.length - getVisible() ? 0 : currentIndex + 1);
             }, 5000);
         }
 
         track.parentElement.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
         track.parentElement.addEventListener('mouseleave', resetAutoSlide);
+        window.addEventListener('resize', () => goToSlide(currentIndex));
 
         track.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; isDragging = true; clearInterval(autoSlideInterval); });
         track.addEventListener('touchmove', (e) => {
             if (!isDragging) return;
             const diff = startX - e.touches[0].clientX;
             if (Math.abs(diff) > 50) {
-                currentIndex = diff > 0 ? (currentIndex + 1) % slides.length : (currentIndex - 1 + slides.length) % slides.length;
-                goToSlide(currentIndex);
+                goToSlide(diff > 0 ? currentIndex + 1 : currentIndex - 1);
                 isDragging = false;
             }
         });
